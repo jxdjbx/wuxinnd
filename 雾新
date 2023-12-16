@@ -1,0 +1,297 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+OrionLib:MakeNotification({
+	Name = "雾新",
+	Content = "正在加载 雾新-破坏者谜团2",
+	Image = "rbxthumb://type=Asset&id=5107182114&w=150&h=150",
+	Time = 2
+})
+
+local Window = OrionLib:MakeWindow({Name = "雾新-破坏者谜团2", HidePremium = false, SaveConfig = true, IntroText = "雾新-破坏者谜团2", ConfigFolder = "BeiFengMurderMystery2"})
+
+local Back = Window:MakeTab({
+	Name = "雾新",
+	Icon = "rbxassetid://14380684950",
+	PremiumOnly = false
+})
+
+Back:AddButton({
+	Name = "返回雾新",
+	Callback = function()
+		loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\114\97\119\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\119\117\120\105\110\54\54\54\54\54\54\54\54\54\54\47\107\97\109\105\47\109\97\105\110\47\119\117\120\105\110\102\97\106\102\103\119\53\46\116\120\116\34\44\116\114\117\101\41\41\40\41\10")()
+	end
+})
+
+local player = game:GetService("Players").LocalPlayer
+local espnames = true
+local printvar = true
+local obj = game.workspace
+
+function Clear()
+	for _,v in pairs(player.PlayerGui:children()) do
+		if v.Name == "tracker" and v:isA("BillboardGui") then
+			v:Destroy()
+		end
+	end
+end
+
+function Create(base, team, colors1, colors2, colors3, teamname)
+	local bb = Instance.new("BillboardGui",player.PlayerGui)
+	bb.Adornee = base
+	bb.ExtentsOffset = Vector3.new(0,1,0)
+	bb.AlwaysOnTop = true
+	bb.Size = UDim2.new(0,5,0,5)
+	bb.StudsOffset = Vector3.new(0,1,0)
+	bb.Name = "tracker"
+	local frame = Instance.new("Frame",bb)
+	frame.ZIndex = 10
+	frame.BackgroundTransparency = 0.3
+	frame.Size = UDim2.new(1,0,1,0)
+	local txtlbl = Instance.new("TextLabel",bb)
+	txtlbl.ZIndex = 10
+	txtlbl.Text = teamname
+	txtlbl.BackgroundTransparency = 1
+	txtlbl.Position = UDim2.new(0,0,0,-35)
+	txtlbl.Size = UDim2.new(1,0,10,0)
+	txtlbl.Font = "ArialBold"
+	txtlbl.FontSize = "Size12"
+	txtlbl.TextStrokeTransparency = 0.5
+	if team then
+		txtlbl.TextColor3 = Color3.new(0,0,255)
+		frame.BackgroundColor3 = Color3.new(0,0,255)
+	else
+		txtlbl.TextColor3 = Color3.new(colors1,colors2,colors3)
+		frame.BackgroundColor3 = Color3.new(colors1,colors2,colors3)
+	end
+end
+
+function findmurderer()
+	local colors1 = 255
+	local colors2 = 0
+	local colors3 = 0
+	for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		if v ~= game:GetService("Players").LocalPlayer then
+			for i,v in pairs(v.Backpack:GetChildren()) do
+				if v.Name == "Knife" then
+					if espnames == true then
+						local teamname = v.Parent.Parent.Name
+						if v.Parent.Parent.Character.Head ~= nil then
+							Create(v.Parent.Parent.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					elseif espnames == false then
+						local teamname = "Murderer"
+						if v.Parent.Parent.Character.Head ~= nil then
+							Create(v.Parent.Parent.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					end
+					murderer = v.Parent.Parent.Name
+				end
+			end
+			for i,v in pairs(v.Character:GetChildren()) do
+				if v.Name == "Knife" then
+					if espnames == true then
+						local teamname = v.Parent.Name
+						if v.Parent.Head ~= nil then
+							Create(v.Parent.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					elseif espnames == false then
+						local teamname = "Murderer"
+						if v.Parent.Head ~= nil then
+							Create(v.Parent.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					end
+					murderer = v.Parent.Name
+					if printvar == true then
+						local murderer1 = tostring(v.Parent.Name)
+					end
+				end
+			end
+		end
+	end
+end
+
+function findsheriff()
+	local colors1 = 0
+	local colors2 = 0
+	local colors3 = 255
+	for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		if v ~= game:GetService("Players").LocalPlayer then
+			for i,v in pairs(v.Backpack:GetChildren()) do
+				if v.Name == "Revolver" or v.Name == "Gun" then 
+					if espnames == true then
+						local teamname = v.Parent.Parent.Name
+						if v.Parent.Parent.Character.Head ~= nil then
+							Create(v.Parent.Parent.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					elseif espnames == false then
+						local teamname = "Sheriff"
+						if v.Parent.Parent.Character.Head ~= nil then
+							Create(v.Parent.Parent.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					end
+					sheriff = v.Parent.Parent.Name
+					if printvar == true then
+						local sheriff1 = tostring(v.Parent.Parent.Name)
+					end
+				end
+			end
+			for i,v in pairs(v.Character:GetChildren()) do
+				if v.Name == "Revolver" or v.Name == "Gun" then
+					if espnames == true then
+						local teamname = v.Parent.Name
+						if v.Parent.Head ~= nil then
+							Create(v.Parent.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					elseif espnames == false then
+						local teamname = "Sheriff"
+						if v.Parent.Head ~= nil then
+							Create(v.Parent.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					end
+					sheriff = v.Parent.Name
+					if printvar == true then
+						local sheriff1 = tostring(v.Parent.Name)
+					end
+				end
+			end
+		end
+	end
+end
+
+function findplayers()
+	findmurderer()
+	findsheriff()
+	local colors1 = 0
+	local colors2 = 255
+	local colors3 = 0
+	for i, v in pairs(game:GetService("Players"):GetChildren()) do
+		if v ~= game:GetService("Players").LocalPlayer then
+			if v.Name ~= murderer then
+				if v.Name ~= sheriff then
+					if espnames == true then
+						local teamname = v.Name
+						if v.Character.Head ~= nil then
+							Create(v.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					elseif espnames == false then
+						local teamname = "Innocents"
+						if v.Parent.Head ~= nil then
+							Create(v.Character.Head, false, colors1 ,colors2, colors3, teamname)
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+function XrayOn(obj)
+	for _,v in pairs(obj:GetChildren()) do 
+		if (v:IsA("BasePart")) and not v.Parent:FindFirstChild("Humanoid") then
+			v.LocalTransparencyModifier = 0.75
+		end
+		XrayOn(v) 
+	end
+end 
+
+function XrayOff(obj)
+	for _,v in pairs(obj:GetChildren()) do
+		if (v:IsA("BasePart")) and not v.Parent:FindFirstChild("Humanoid") then
+			v.LocalTransparencyModifier = 0
+		end XrayOff(v)
+	end
+end
+
+local Home = Window:MakeTab({
+	Name = "主要功能",
+	Icon = "rbxassetid://14361559991",
+	PremiumOnly = false
+})
+
+murdererSheriffESP = false
+
+Home:AddToggle({
+	Name = "破坏者/警长-透视",
+	Default = false,
+	Callback = function(Value)
+		murdererSheriffESP = Value
+
+		if not murdererSheriffESP then
+			Clear()
+		end
+		if murdererSheriffESP then
+			Clear()
+			while murdererSheriffESP do
+				murderer = "None"
+				sheriff = "None"
+				findmurderer()
+				findsheriff()
+				wait(1)
+			end
+		end
+	end    
+})
+
+playersESP = false
+sum = 0
+
+Home:AddToggle({
+	Name = "玩家-透视",
+	Default = false,
+	Callback = function(Value)
+		playersESP = Value
+		if not playersESP then
+			Clear()
+		end
+		if playersESP then
+			Clear()
+			while playersESP do
+				findplayers()
+				wait(1)
+			end
+		end
+	end
+})
+
+buildESP = false
+
+Home:AddToggle({
+	Name = "建筑-透视",
+	Default = false,
+	Callback = function(Value)
+		buildESP = Value
+
+		if buildESP then
+			XrayOn(obj)
+		else
+			XrayOff(obj)
+		end
+	end    
+})
+
+run = false
+
+Home:AddToggle({
+	Name = "奔跑",
+	Default = false,
+	Callback = function(Value)
+		run = Value
+
+		if run then
+			player.Character.Humanoid.WalkSpeed = 32
+		else
+			player.Character.Humanoid.WalkSpeed = 16
+		end
+	end    
+})
+
+Home:AddButton({
+	Name = "枪-传送",
+	Callback = function()
+		if game.Workspace.GunDrop.CFrame ~= nil then
+			game.Workspace.GunDrop.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+		end
+	end
+})
+
+OrionLib:Init()
